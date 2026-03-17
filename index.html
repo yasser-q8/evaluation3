@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="ar" dir="rtl">
 <head>
@@ -62,7 +61,7 @@
             background: rgba(255,255,240,0.15); border: 4px solid var(--gold);
             display: flex; align-items: center; justify-content: center; flex-shrink: 0; overflow: hidden;
             box-shadow: 0 0 0 5px rgba(212,175,55,0.3);
-            cursor: pointer; /* مؤشر اليد */
+            cursor: pointer;
             transition: border-color 0.2s;
         }
         .logo-wrap:hover { border-color: var(--gold2); }
@@ -652,7 +651,6 @@ const branchesData = [
     { nameAr: "هدية", nameEn: "Hadiya", areaManager: "حجازي" }
 ];
 
-// تعبئة قائمة الفروع في الـ datalist
 function populateBranchList() {
     const datalist = document.getElementById('branchList');
     datalist.innerHTML = '';
@@ -672,7 +670,7 @@ function fillManagerFromBranch(inputValue) {
         const en = enMap[ar] || ar;
         managerField.value = ar + ' - ' + en;
     } else {
-        managerField.value = ''; // إذا لم يتم العثور على تطابق، امسح الحقل
+        managerField.value = '';
     }
 }
 
@@ -875,11 +873,102 @@ function calculate() {
     window.scrollTo({top: document.getElementById('resultCard').offsetTop - 20, behavior:'smooth'});
 }
 
+// ================ دالة واتساب المعدلة ================
 function shareWhatsApp() {
-    const branch = document.getElementById('branchName').value || '—';
-    const score = document.getElementById('rBranchScore').textContent;
-    const msg = `🏪 *تقرير زيارة نايف*\n📍 الفرع: ${branch}\n📊 النتيجة: ${score}\nمدقق: ${document.getElementById('auditorName').value}`;
-    window.open('https://wa.me/?text='+encodeURIComponent(msg),'_blank');
+    // تأكد من حساب النتائج أولاً
+    calculate();
+
+    // جمع البيانات
+    const branch = document.getElementById('branchName').value || 'غير محدد';
+    const manager = document.getElementById('branchManager').value || 'غير محدد';
+    const auditor = document.getElementById('auditorName').value || 'غير محدد';
+    const date = document.getElementById('visitDate').value || 'غير محدد';
+    const time = document.getElementById('visitTime').value || 'غير محدد';
+    const type = document.getElementById('visitType').value || 'غير محدد';
+    const visitNum = document.getElementById('visitNum').value || 'غير محدد';
+
+    // نتائج الأقسام
+    const sections = ['clean', 'hygiene', 'food', 'product', 'service'];
+    const sectionNames = {
+        clean: 'النظافة العامة',
+        hygiene: 'نظافة الموظفين',
+        food: 'سلامة الغذاء',
+        product: 'جودة المنتج',
+        service: 'الخدمة'
+    };
+    let sectionDetails = '';
+    let totalYes = 0, totalActive = 0;
+    sections.forEach(sec => {
+        const sc = getSectionScore(sec);
+        totalYes += sc.yes;
+        totalActive += sc.yes + sc.no;
+        const pct = calcSectionPct(sc);
+        const bar = pct === null ? '◻️' : (pct >= 90 ? '🟢' : pct >= 75 ? '🔵' : pct >= 60 ? '🟡' : '🔴');
+        sectionDetails += `${bar} *${sectionNames[sec]}*: ${pct !== null ? pct + '%' : 'N/A'} (✅ ${sc.yes} | ❌ ${sc.no} | ⏺️ ${sc.na})\n`;
+    });
+
+    const branchScore = totalActive > 0 ? Math.round((totalYes / totalActive) * 100) : 0;
+
+    // المشكلات
+    const errLabels = [];
+    document.querySelectorAll('[data-section="errors"] .audit-item').forEach(item => {
+        if (item.getAttribute('data-state') === 'yes') errLabels.push(item.querySelector('.audit-item-ar').textContent);
+    });
+    const issuesText = errLabels.length ? errLabels.map(l => `• ${l}`).join('\n') : 'لا توجد مشكلات ✅';
+
+    // الموظفين
+    const empResults = [];
+    document.querySelectorAll('.emp-card').forEach((card, i) => {
+        const name = card.querySelector('.emp-name')?.value || `موظف ${i + 1}`;
+        const scores = card.querySelectorAll('.empScore');
+        let sum = 0, cnt = 0;
+        scores.forEach(s => { const v = parseInt(s.value); if (!isNaN(v)) { sum += v; cnt++; } });
+        const avg = cnt > 0 ? Math.round(sum / cnt) : 0;
+        if (cnt > 0) empResults.push(`• ${name}: ${avg}%`);
+    });
+    const empText = empResults.length ? empResults.join('\n') : 'لا يوجد موظفين مضافين';
+
+    // الملاحظات وخطة التصحيح
+    const notes = document.getElementById('mainNotes').value || 'لا توجد';
+    const action = document.getElementById('actionPlan').value || 'لا توجد';
+
+    // تقييم عام
+    const grade = branchScore >= 90 ? 'ممتاز' : branchScore >= 75 ? 'جيد' : branchScore >= 60 ? 'مقبول' : 'ضعيف';
+    const emoji = branchScore >= 90 ? '🏆' : branchScore >= 75 ? '👍' : branchScore >= 60 ? '⚠️' : '🔻';
+
+    // بناء الرسالة النهائية
+    const message = 
+`🍽️ *تقرير تقييم فرع مطاعم نايف*
+━━━━━━━━━━━━━━━━
+🏪 *الفرع:* ${branch}
+👔 *المدير:* ${manager}
+🕵️ *المقيّم:* ${auditor}
+📅 *التاريخ:* ${date} ⏰ ${time}
+🔍 *نوع الزيارة:* ${type} | #${visitNum}
+━━━━━━━━━━━━━━━━
+${emoji} *النتيجة الكلية: ${branchScore}% (${grade})*
+━━━━━━━━━━━━━━━━
+📊 *تفاصيل الأقسام:*
+${sectionDetails}
+━━━━━━━━━━━━━━━━
+⚠️ *المشكلات المرصودة:* 
+${issuesText}
+━━━━━━━━━━━━━━━━
+👥 *نتائج الموظفين:*
+${empText}
+━━━━━━━━━━━━━━━━
+📝 *ملاحظات المدقق:* 
+${notes}
+━━━━━━━━━━━━━━━━
+🎯 *خطة التصحيح:* 
+${action}
+━━━━━━━━━━━━━━━━
+إدارة التشغيل | قسم التدريب
+عصام عبد النبي شعبان | 📞 67011120
+مطاعم نايف للأغذية © 2026`;
+
+    // فتح واتساب مع النص
+    window.open('https://wa.me/?text=' + encodeURIComponent(message), '_blank');
 }
 
 async function savePDF() {
