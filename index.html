@@ -16,7 +16,13 @@
             --shadow: 0 4px 24px rgba(158,27,27,0.15);
         }
         * { box-sizing: border-box; margin: 0; padding: 0; }
-        body { font-family: 'Tahoma', 'Arial', sans-serif; background: var(--bg); color: var(--text); min-height: 100vh; }
+        body {
+            font-family: 'Tahoma', 'Arial', sans-serif;
+            background: var(--bg);
+            color: var(--text);
+            min-height: 100vh;
+            -webkit-tap-highlight-color: transparent;
+        }
 
         /* === TAB BAR === */
         .tabbar {
@@ -27,7 +33,7 @@
             flex: 1; padding: 14px 6px; border: none; background: transparent;
             color: rgba(255,255,255,0.5); font-family: inherit; font-size: 14px;
             font-weight: 700; cursor: pointer; border-bottom: 3px solid transparent;
-            transition: all 0.2s;
+            transition: all 0.2s; touch-action: manipulation;
         }
         .tabbtn.on {
             color: #fff; border-bottom-color: var(--gold); background: rgba(255,215,0,0.1);
@@ -56,7 +62,10 @@
             background: rgba(255,255,240,0.15); border: 4px solid var(--gold);
             display: flex; align-items: center; justify-content: center; flex-shrink: 0; overflow: hidden;
             box-shadow: 0 0 0 5px rgba(212,175,55,0.3);
+            cursor: pointer; /* مؤشر اليد */
+            transition: border-color 0.2s;
         }
+        .logo-wrap:hover { border-color: var(--gold2); }
         .logo-wrap img { width: 100%; height: 100%; object-fit: cover; }
         .header-text { flex: 1; }
         .header-en { font-size: 12px; color: var(--gold2); font-weight: 600; margin-bottom: 2px; }
@@ -67,7 +76,7 @@
         /* === CONTAINER === */
         .container { max-width: 800px; margin: 0 auto; padding: 0 12px 40px; }
 
-        /* === CARDS (نفس التصميم القديم مع إضافات بسيطة) === */
+        /* === CARDS === */
         .card {
             background: var(--surface); border-radius: 24px; box-shadow: var(--shadow); margin-top: 18px;
             overflow: hidden; border: 1px solid var(--gold2);
@@ -88,9 +97,10 @@
         .fg { display: flex; flex-direction: column; gap: 5px; }
         .fg label { font-size: 11px; font-weight: 700; color: var(--text2); text-transform: uppercase; }
         .fg input, .fg select, .fg textarea {
-            width: 100%; padding: 10px 14px; border: 1.5px solid var(--border); border-radius: 14px;
-            font-family: inherit; font-size: 14px; color: var(--text); background: var(--surface2);
-            outline: none; transition: 0.15s;
+            width: 100%; padding: 12px 14px; border: 1.5px solid var(--border); border-radius: 14px;
+            font-family: inherit; font-size: 16px;
+            color: var(--text); background: var(--surface2);
+            outline: none; transition: 0.15s; -webkit-appearance: none; appearance: none;
         }
         .fg input:focus, .fg select:focus, .fg textarea:focus { border-color: var(--gold); background: #fff; box-shadow: 0 0 0 3px rgba(212,175,55,0.2); }
 
@@ -110,15 +120,17 @@
             display: flex; align-items: center; gap: 0;
             padding: 10px 14px; border: 1.5px solid var(--border); border-radius: 16px;
             margin-bottom: 8px; background: var(--surface2); transition: all .2s;
+            touch-action: manipulation;
         }
         .audit-item-text { flex: 1; min-width: 0; }
         .audit-item-ar { font-size: 14px; font-weight: 700; color: var(--text); display: block; line-height: 1.3; }
         .audit-item-en { font-size: 10px; font-weight: 600; color: var(--text2); display: block; margin-top: 2px; opacity: 0.8; }
         .tri-btns { display: flex; gap: 4px; flex-shrink: 0; margin-right: 10px; }
         .tri-btn {
-            padding: 5px 8px; border: 1.5px solid var(--border); border-radius: 30px;
-            background: #fff; font-family: inherit; font-size: 10px; font-weight: 700;
+            padding: 8px 10px; border: 1.5px solid var(--border); border-radius: 30px;
+            background: #fff; font-family: inherit; font-size: 11px; font-weight: 700;
             cursor: pointer; transition: all .15s; color: #777; white-space: nowrap;
+            touch-action: manipulation; min-width: 55px; text-align: center;
         }
         .tri-btn.yes { border-color: var(--green); background: #E3F7EC; color: var(--green); }
         .tri-btn.no { border-color: var(--danger); background: #FFECEC; color: var(--danger); }
@@ -128,7 +140,7 @@
         .audit-item.state-no { border-color: var(--danger); background: #FFF5F5; }
         .audit-item.state-na { border-color: #aaa; background: #F9F9F9; }
 
-        /* تقييم الموظفين (كما هو) */
+        /* الموظفين */
         .emp-list { display: flex; flex-direction: column; gap: 12px; }
         .emp-card { border: 1.5px solid var(--border); border-radius: 18px; overflow: hidden; background: var(--surface2); }
         .emp-header {
@@ -153,14 +165,14 @@
             display: flex; align-items: center; border: 1.5px solid var(--border); border-radius: 12px; overflow: hidden; background: #fff;
         }
         .sf-wrap input {
-            width: 100%; padding: 8px 10px; border: none; font-family: inherit;
+            width: 100%; padding: 10px; border: none; font-family: inherit;
             font-size: 15px; font-weight: 700; color: var(--text); background: transparent; outline: none; text-align: center;
         }
         .sf-wrap span { padding: 0 8px 0 5px; font-size: 11px; color: var(--text2); font-weight: 700; white-space: nowrap; }
         .emp-bar { height: 4px; background: #EEE; margin: 0 15px 12px; border-radius: 2px; overflow: hidden; }
         .emp-bar-fill { height: 100%; width: 0%; background: var(--gold); border-radius: 2px; transition: width .5s; }
 
-        /* صور الزيارة (كما هي) */
+        /* الصور - بدون capture */
         .photo-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 8px; margin-top: 8px; }
         .photo-slot { aspect-ratio: 1; border: 2px dashed var(--gold); border-radius: 16px; display: flex; flex-direction: column; align-items: center; justify-content: center; cursor: pointer; background: var(--surface2); overflow: hidden; position: relative; transition: 0.2s; }
         .photo-slot:hover { border-color: var(--red); background: #FFF7EC; }
@@ -173,7 +185,7 @@
         .photo-slot.has-photo .ph-icon, .photo-slot.has-photo .ph-label { display: none; }
         .photo-slot.has-photo img { display: block; }
 
-        /* نتيجة التقييم (كما هي) */
+        /* نتيجة التقييم */
         .result-card {
             background: var(--surface); border-radius: 24px; box-shadow: var(--shadow); margin-top: 20px;
             border: 2px solid var(--gold); overflow: hidden; display: none;
@@ -196,9 +208,9 @@
         .btn-grid { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 10px; margin-top: 20px; }
         .btn {
             display: flex; align-items: center; justify-content: center; gap: 6px;
-            padding: 12px 8px; border: none; border-radius: 40px;
+            padding: 14px 8px; border: none; border-radius: 40px;
             font-family: inherit; font-size: 14px; font-weight: 700; cursor: pointer;
-            transition: 0.2s; white-space: nowrap;
+            transition: 0.2s; white-space: nowrap; touch-action: manipulation;
         }
         .btn-calc { background: linear-gradient(135deg, var(--red), var(--red2)); color: #fff; }
         .btn-pdf { background: linear-gradient(135deg, var(--gold3), var(--gold)); color: #2C1107; }
@@ -207,12 +219,13 @@
         .btn-reset { background: #F5F5F5; color: var(--text2); border: 1.5px solid var(--border); grid-column: span 3; }
 
         .add-emp-btn, .add-photo-btn {
-            width: 100%; padding: 12px; margin-top: 10px; border: 2px dashed var(--gold);
+            width: 100%; padding: 14px; margin-top: 10px; border: 2px dashed var(--gold);
             border-radius: 15px; background: #fff; color: var(--gold3); font-weight: 700;
             cursor: pointer; display: flex; align-items: center; justify-content: center; gap: 8px;
+            touch-action: manipulation;
         }
 
-        /* === DASHBOARD STYLES (مستوحاة من EV3) === */
+        /* لوحة التحفيز */
         .dh-stats {
             display: grid; grid-template-columns: repeat(4,1fr); gap: 8px; margin: 15px 0;
         }
@@ -264,12 +277,13 @@
         .lb-refresh {
             background: rgba(255,255,255,0.2); border: 1px solid rgba(255,255,255,0.3);
             color: #fff; padding: 5px 14px; border-radius: 30px; font-size: 12px; font-weight: 700; cursor: pointer;
+            touch-action: manipulation;
         }
         .lb-list { padding: 14px; }
         .lb-row {
             display: flex; align-items: center; gap: 10px; padding: 12px;
             border-radius: 18px; border: 1.5px solid var(--border); background: var(--surface2);
-            margin-bottom: 8px; cursor: pointer; transition: 0.2s;
+            margin-bottom: 8px; cursor: pointer; transition: 0.2s; touch-action: manipulation;
         }
         .lb-row:hover { border-color: var(--gold); box-shadow: 0 3px 12px rgba(212,175,55,0.2); transform: translateY(-2px); }
         .lb-row.r1 { background: #FFF8E0; border-color: #E8C84A; }
@@ -293,7 +307,7 @@
         .lb-grade { font-size: 10px; font-weight: 700; padding: 2px 8px; border-radius: 20px; display: inline-block; margin-top: 2px; }
         .lb-del {
             background: none; border: none; color: #CCC; font-size: 16px; cursor: pointer;
-            padding: 0 5px; transition: color 0.2s;
+            padding: 0 5px; transition: color 0.2s; touch-action: manipulation;
         }
         .lb-del:hover { color: var(--danger); }
         .lb-empty { padding: 40px 20px; text-align: center; color: var(--text2); }
@@ -308,7 +322,7 @@
             padding: 12px 16px; display: flex; align-items: center; gap: 10px;
         }
         .det-hd h3 { font-size: 16px; font-weight: 700; flex:1; }
-        .det-close { background:none; border:none; color:#fff; font-size:20px; cursor:pointer; }
+        .det-close { background:none; border:none; color:#fff; font-size:20px; cursor:pointer; touch-action: manipulation; }
         .det-body { padding: 16px; }
         .det-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; margin-bottom: 12px; }
         .det-item { background: var(--surface2); border-radius: 12px; padding: 10px; border:1px solid var(--border); }
@@ -318,6 +332,13 @@
         .footer { text-align: center; padding: 20px 20px 8px; font-size: 11px; color: #998; font-weight: 600; }
         .footer strong { color: var(--red); }
 
+        .toast {
+            position: fixed; bottom: 20px; left: 50%; transform: translateX(-50%);
+            background: #1D8348; color: #fff; padding: 12px 24px; border-radius: 40px;
+            font-weight: 700; box-shadow: 0 6px 18px rgba(0,0,0,0.2); z-index: 9999;
+            transition: opacity 0.3s; opacity: 0; pointer-events: none;
+        }
+
         @media (max-width:500px){
             .field-row, .field-row.triple { grid-template-columns: 1fr; }
             .btn-grid { grid-template-columns: 1fr 1fr; }
@@ -326,6 +347,7 @@
             .podium-row { padding: 12px 6px; }
             .pod-avatar { width: 40px; height: 40px; font-size: 16px; }
             .pod-block { height: 40px; }
+            .tri-btn { min-width: 45px; padding: 8px 5px; font-size: 10px; }
         }
         @media print { .print-hide, .tabbar, .btn-grid { display: none !important; } }
     </style>
@@ -346,7 +368,7 @@
 <div class="header">
     <div class="header-bg-pattern"></div>
     <div class="header-inner">
-        <div class="logo-wrap">
+        <div class="logo-wrap" onclick="window.open('https://Ordernaif.com', '_blank')">
             <img src="https://i.postimg.cc/NM2zJWZD/NAIF-LOGO.jpg" alt="Naif Logo">
         </div>
         <div class="header-text">
@@ -359,7 +381,7 @@
 </div>
 
 <div class="container" id="reportBody">
-    <!-- بطاقة بيانات الفرع والزيارة (كما هي) -->
+    <!-- بطاقة بيانات الفرع والزيارة (باستخدام datalist) -->
     <div class="card">
         <div class="card-header"><span class="ico">🏪</span><h2>بيانات الفرع والزيارة / Branch & Visit Info</h2></div>
         <div class="card-body">
@@ -409,8 +431,6 @@
     <div class="card">
         <div class="card-header"><span class="ico">✅</span><h2>تدقيق الفرع / Branch Audit</h2><span class="hcount" id="auditProgress">0/22</span></div>
         <div class="card-body" id="auditBody">
-            <!-- سيتم تعبئتها تلقائياً كما في الكود الأصلي، ولكنها موجودة مسبقاً في الملف، سأبقيها كما هي لكن مع اختصار هنا -->
-            <!-- سأعيد استخدام نفس المحتوى من الملف الأصلي، لكن للاختصار سأكتبها بنفس الهيكل -->
             <div class="audit-section"><div class="asec-title"><span>🧹</span><span class="asec-title-text">النظافة العامة / General Cleanliness</span><span class="asec-pill" id="pill-clean">—</span></div>
             <div data-section="clean">
                 <div class="audit-item" data-key="clean-1"><div class="audit-item-text"><span class="audit-item-ar">منطقة الجلوس نظيفة</span><span class="audit-item-en">Dining Area Clean</span></div><div class="tri-btns"><button class="tri-btn" data-val="yes" onclick="setTri(this)">نعم / Yes</button><button class="tri-btn" data-val="no" onclick="setTri(this)">لا / No</button><button class="tri-btn" data-val="na" onclick="setTri(this)">لا ينطبق / N/A</button></div></div>
@@ -465,21 +485,21 @@
         </div>
     </div>
 
-    <!-- تقييم الموظفين (كما هو) -->
+    <!-- تقييم الموظفين -->
     <div class="card"><div class="card-header"><span class="ico">👥</span><h2>تقييم الموظفين / Employee Evaluation</h2></div><div class="card-body"><div class="emp-list" id="empList"></div><button class="add-emp-btn print-hide" onclick="addEmp()" id="addEmpBtn"><span style="font-size:17px">+</span> <span>إضافة موظف / Add Employee</span></button></div></div>
 
-    <!-- صور الزيارة (كما هي) -->
+    <!-- صور الزيارة - بدون capture -->
     <div class="card"><div class="card-header"><span class="ico">📷</span><h2>صور الزيارة / Visit Photos</h2></div><div class="card-body"><div class="photo-grid" id="photoGrid">
-        <div class="photo-slot" id="ps-0"><input type="file" accept="image/*" capture="environment" onchange="loadPhoto(this,'ps-0')"><img id="pi-0"><button class="ph-del" onclick="delPhoto('ps-0',event)">✕</button><span class="ph-icon">📸</span><span class="ph-label">إضافة صورة / Add Photo</span></div>
-        <div class="photo-slot" id="ps-1"><input type="file" accept="image/*" capture="environment" onchange="loadPhoto(this,'ps-1')"><img id="pi-1"><button class="ph-del" onclick="delPhoto('ps-1',event)">✕</button><span class="ph-icon">📸</span><span class="ph-label">إضافة صورة / Add Photo</span></div>
-        <div class="photo-slot" id="ps-2"><input type="file" accept="image/*" capture="environment" onchange="loadPhoto(this,'ps-2')"><img id="pi-2"><button class="ph-del" onclick="delPhoto('ps-2',event)">✕</button><span class="ph-icon">📸</span><span class="ph-label">إضافة صورة / Add Photo</span></div>
+        <div class="photo-slot" id="ps-0"><input type="file" accept="image/*" onchange="loadPhoto(this,'ps-0')"><img id="pi-0"><button class="ph-del" onclick="delPhoto('ps-0',event)">✕</button><span class="ph-icon">📸</span><span class="ph-label">إضافة صورة / Add Photo</span></div>
+        <div class="photo-slot" id="ps-1"><input type="file" accept="image/*" onchange="loadPhoto(this,'ps-1')"><img id="pi-1"><button class="ph-del" onclick="delPhoto('ps-1',event)">✕</button><span class="ph-icon">📸</span><span class="ph-label">إضافة صورة / Add Photo</span></div>
+        <div class="photo-slot" id="ps-2"><input type="file" accept="image/*" onchange="loadPhoto(this,'ps-2')"><img id="pi-2"><button class="ph-del" onclick="delPhoto('ps-2',event)">✕</button><span class="ph-icon">📸</span><span class="ph-label">إضافة صورة / Add Photo</span></div>
     </div><button class="add-photo-btn print-hide" onclick="addPhotoSlot()">+ <span>إضافة خانة صورة / Add Photo Slot</span></button></div></div>
 
     <!-- ملاحظات وخطة -->
     <div class="card"><div class="card-header"><span class="ico">📝</span><h2>ملاحظات المدقق / Auditor Notes</h2></div><div class="card-body"><div class="fg"><label>الملاحظات الرئيسية / Main Observations</label><textarea id="mainNotes" placeholder="اكتب الملاحظات المهمة..."></textarea></div></div></div>
     <div class="card"><div class="card-header"><span class="ico">🎯</span><h2>خطة التصحيح / Action Plan</h2></div><div class="card-body"><div class="fg"><label>الإجراءات التصحيحية والمسؤولون / Corrective Actions & Responsible</label><textarea id="actionPlan" placeholder="صِف الإجراءات ومن المسؤول..."></textarea></div></div></div>
 
-    <!-- أزرار الإجراءات مع إضافة زر الحفظ -->
+    <!-- أزرار الإجراءات مع زر الحفظ -->
     <div class="btn-grid print-hide">
         <button class="btn btn-calc" onclick="calculate()"><span>📊</span>احسب</button>
         <button class="btn btn-pdf" onclick="savePDF()"><span>📄</span>PDF</button>
@@ -488,7 +508,7 @@
         <button class="btn btn-reset" onclick="resetForm()"><span>🔄</span>تقرير جديد</button>
     </div>
 
-    <!-- نتيجة التقييم (تظهر بعد الحساب) -->
+    <!-- نتيجة التقييم -->
     <div class="result-card" id="resultCard">
         <div class="result-top">📊 <span>نتيجة تقييم الفرع / Branch Evaluation Result</span></div>
         <div class="result-scores">
@@ -529,7 +549,7 @@
             <div class="dhs-box"><div class="dhs-num" id="dhTop">—</div><div class="dhs-lbl">الأعلى</div></div>
         </div>
 
-        <!-- منصة المتصدرين (تظهر عند وجود تقييمين على الأقل) -->
+        <!-- منصة المتصدرين -->
         <div class="podium-wrap" id="podiumWrap" style="display:none;">
             <div class="podium-title">🎖️ منصة المتصدرين</div>
             <div class="podium-row" id="podiumRow"></div>
@@ -551,7 +571,7 @@
             </div>
         </div>
 
-        <!-- لوحة تفاصيل الفرع عند النقر -->
+        <!-- لوحة تفاصيل الفرع -->
         <div class="det-panel" id="detPanel" style="display:none;">
             <div class="det-hd">
                 <span>📋</span>
@@ -565,11 +585,11 @@
     </div>
 </div>
 
-<!-- توست للإشعارات -->
-<div class="toast" id="toast" style="position:fixed; bottom:20px; left:50%; transform:translateX(-50%); background:#1D8348; color:#fff; padding:12px 24px; border-radius:40px; font-weight:700; box-shadow:0 6px 18px rgba(0,0,0,0.2); z-index:9999; transition:0.3s; opacity:0; pointer-events:none;">🔔</div>
+<!-- توست الإشعارات -->
+<div class="toast" id="toast">🔔</div>
 
 <script>
-// ================ بيانات الفروع ووظائفها (من الملف الأصلي) ================
+// ================ بيانات الفروع ووظائفها ================
 const branchesData = [
     { nameAr: "اسواق القرين", nameEn: "Souq Qurain", areaManager: "مرتضى" },
     { nameAr: "الجابرية بنت الديك", nameEn: "Jabriya 2 - Jabriya BD", areaManager: "طارق" },
@@ -632,6 +652,7 @@ const branchesData = [
     { nameAr: "هدية", nameEn: "Hadiya", areaManager: "حجازي" }
 ];
 
+// تعبئة قائمة الفروع في الـ datalist
 function populateBranchList() {
     const datalist = document.getElementById('branchList');
     datalist.innerHTML = '';
@@ -650,10 +671,12 @@ function fillManagerFromBranch(inputValue) {
         const enMap = { 'طارق':'Tariq', 'مرتضى':'Mortada', 'عماد':'Emad', 'حجازي':'Hegazy', 'انور':'Anwar', 'مختار':'Mokhtar', 'ثروت':'Tharwat', 'وليد':'Waleed' };
         const en = enMap[ar] || ar;
         managerField.value = ar + ' - ' + en;
+    } else {
+        managerField.value = ''; // إذا لم يتم العثور على تطابق، امسح الحقل
     }
 }
 
-// ================ دوال التقييم الأساسية (من الملف الأصلي) ================
+// ================ دوال التقييم الأساسية ================
 let empCount = 0;
 let photoCount = 3;
 
@@ -778,7 +801,7 @@ function addPhotoSlot() {
     const slot = document.createElement('div');
     slot.className = 'photo-slot';
     slot.id = 'ps-'+n;
-    slot.innerHTML = `<input type="file" accept="image/*" capture="environment" onchange="loadPhoto(this,'ps-${n}')"><img id="pi-${n}"><button class="ph-del" onclick="delPhoto('ps-${n}',event)">✕</button><span class="ph-icon">📸</span><span class="ph-label">إضافة صورة / Add Photo</span>`;
+    slot.innerHTML = `<input type="file" accept="image/*" onchange="loadPhoto(this,'ps-${n}')"><img id="pi-${n}"><button class="ph-del" onclick="delPhoto('ps-${n}',event)">✕</button><span class="ph-icon">📸</span><span class="ph-label">إضافة صورة / Add Photo</span>`;
     grid.appendChild(slot);
 }
 
@@ -907,7 +930,7 @@ function resetForm() {
     location.reload();
 }
 
-// ================ دوال لوحة التحفيز والتخزين (مستوحاة من EV3) ================
+// ================ دوال لوحة التحفيز والتخزين ================
 const STORE_KEY = 'naif-eval-records-v1';
 
 function showToast(msg, type = '') {
@@ -931,17 +954,14 @@ function setRecords(arr) {
 }
 
 function saveToDash() {
-    // تأكد من وجود اسم الفرع
     const bName = document.getElementById('branchName').value.trim();
     if (!bName) {
         showToast('⚠️ أدخل اسم الفرع أولاً', 'err');
         return;
     }
 
-    // احسب النتائج أولاً
     calculate();
 
-    // اجمع بيانات الأقسام
     const sections = ['clean','hygiene','food','product','service'];
     const sectionScores = {};
     sections.forEach(sec => {
@@ -949,7 +969,6 @@ function saveToDash() {
         sectionScores[sec] = calcSectionPct(sc);
     });
 
-    // قائمة المشكلات (النصوص)
     const issueList = [];
     document.querySelectorAll('[data-section="errors"] .audit-item').forEach(item => {
         if (item.getAttribute('data-state') === 'yes') {
@@ -957,7 +976,6 @@ function saveToDash() {
         }
     });
 
-    // نتيجة الفرع الكلية
     let totalYes = 0, totalActive = 0;
     sections.forEach(sec => { const s = getSectionScore(sec); totalYes += s.yes; totalActive += s.yes + s.no; });
     const branchScore = totalActive > 0 ? Math.round((totalYes / totalActive) * 100) : 0;
@@ -984,13 +1002,11 @@ function saveToDash() {
     setRecords(arr);
     showToast('🏆 تم الحفظ في لوحة التحفيز!');
 
-    // تحديث لوحة التحفيز إذا كانت مفتوحة
     if (document.getElementById('pgDash').classList.contains('on')) {
         loadDash();
     }
 }
 
-// دالة الحصول على معلومات التقدير (للوحة)
 function gradeInfo2(s) {
     if (s >= 90) return { ar: 'ممتاز', en: 'Excellent', color: '#1D8348' };
     if (s >= 75) return { ar: 'جيد', en: 'Good', color: '#1F618D' };
@@ -1010,11 +1026,9 @@ function loadDash() {
         return;
     }
 
-    // إحصائيات
     document.getElementById('dhTotal').textContent = records.length;
 
-    // أفضل نتيجة لكل فرع (أحدث تقييم لكل فرع مع أعلى نتيجة)
-    const branchMap = new Map(); // اسم الفرع -> أعلى تسجيل
+    const branchMap = new Map();
     records.forEach(rec => {
         if (!branchMap.has(rec.branch) || rec.score > branchMap.get(rec.branch).score) {
             branchMap.set(rec.branch, rec);
@@ -1028,23 +1042,19 @@ function loadDash() {
     const topScore = Math.max(...records.map(r => r.score));
     document.getElementById('dhTop').textContent = topScore + '%';
 
-    // ترتيب الفروع حسب النتيجة
     const sorted = uniqueBranches.sort((a, b) => b.score - a.score);
 
-    // منصة المتصدرين (إذا كان لدينا 2 على الأقل)
     if (sorted.length >= 2) {
         document.getElementById('podiumWrap').style.display = 'block';
         const top3 = sorted.slice(0, 3);
-        const podiumHtml = [];
-        // ترتيب العرض: الثاني (مركز الوصيف) ، الأول (البطل) ، الثالث
         const order = top3.length === 1 ? [top3[0]] : top3.length === 2 ? [top3[1], top3[0]] : [top3[1], top3[0], top3[2]];
         const crowns = top3.length === 1 ? ['🥇'] : top3.length === 2 ? ['🥈','🥇'] : ['🥈','🥇','🥉'];
         const podClasses = top3.length === 1 ? ['pod-1'] : top3.length === 2 ? ['pod-2','pod-1'] : ['pod-2','pod-1','pod-3'];
-        order.forEach((b, idx) => {
-            if (!b) return;
+        document.getElementById('podiumRow').innerHTML = order.map((b, idx) => {
+            if (!b) return '';
             const g = gradeInfo2(b.score);
             const initial = b.branch.charAt(0);
-            podiumHtml.push(`
+            return `
                 <div class="pod-item ${podClasses[idx]}">
                     <div class="pod-crown">${crowns[idx]}</div>
                     <div class="pod-avatar">${initial}</div>
@@ -1053,27 +1063,22 @@ function loadDash() {
                     <div class="pod-score">${b.score}%</div>
                     <div class="pod-grade" style="background:${g.color}20; color:${g.color};">${g.ar}</div>
                 </div>
-            `);
-        });
-        document.getElementById('podiumRow').innerHTML = podiumHtml.join('');
+            `;
+        }).join('');
     } else {
         document.getElementById('podiumWrap').style.display = 'none';
     }
 
-    // بناء قائمة الترتيب
     const medals = ['🥇','🥈','🥉'];
     const listHtml = sorted.map((b, i) => {
         const g = gradeInfo2(b.score);
         const rankClass = i === 0 ? 'r1' : i === 1 ? 'r2' : i === 2 ? 'r3' : '';
         const rankBadge = i < 3 ? medals[i] : (i + 1);
-        const rankSpan = `<div class="lb-rank ${i<3?'': 'other'}">${rankBadge}</div>`;
-
-        // عدد زيارات هذا الفرع (عدد مرات التقييم)
         const visits = records.filter(r => r.branch === b.branch).length;
 
         return `
             <div class="lb-row ${rankClass}" onclick="showBranchDetail('${b.branch}')">
-                ${rankSpan}
+                <div class="lb-rank ${i<3?'': 'other'}">${rankBadge}</div>
                 <div class="lb-info">
                     <div class="lb-name">${b.branch}</div>
                     <div class="lb-meta">📅 ${b.date} · 🔍 ${visits} ${visits>1?'زيارات':'زيارة'} · 👔 ${b.manager}</div>
@@ -1145,16 +1150,10 @@ function switchTab(tab, btn) {
 window.onload = function() {
     populateBranchList();
     document.getElementById('visitDate').value = new Date().toISOString().split('T')[0];
-    addEmp(); addEmp(); // إضافة موظفين افتراضيين
+    addEmp(); addEmp();
     updateAllPills();
-
-    // تحميل لوحة التحفيز إذا كانت التبويب نشط (لكنها ليست نشطة افتراضياً)
 };
 </script>
 
-<!-- تعريف توست بسيط (بدون كلاس toast في CSS) -->
-<style>
-    .toast { transition: opacity 0.3s; }
-</style>
 </body>
 </html>
