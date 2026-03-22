@@ -184,23 +184,81 @@
         .photo-slot.has-photo .ph-icon, .photo-slot.has-photo .ph-label { display: none; }
         .photo-slot.has-photo img { display: block; }
 
-        /* نتيجة التقييم */
+        /* === نتيجة التقييم (التصميم الجديد) === */
         .result-card {
-            background: var(--surface); border-radius: 24px; box-shadow: var(--shadow); margin-top: 20px;
-            border: 2px solid var(--gold); overflow: hidden; display: none;
-            padding: 6mm;
+            background: var(--surface); border-radius: 28px; box-shadow: var(--shadow); margin-top: 20px;
+            border: 2px solid var(--gold); overflow: hidden;
+            display: none;
         }
         .result-card.show { display: block; }
-        .result-top { padding: 16px; text-align: center; color: #fff; background: linear-gradient(135deg, var(--red3), var(--red)); font-size: 16px; font-weight: 800; border-radius: 18px 18px 0 0; margin-bottom: 6px; }
-        .result-scores { display: grid; grid-template-columns: 1fr 1fr; margin-top: 8px; gap: 3px; }
-        .rs-item { padding: 20px 14px; text-align: center; border-bottom: 1px solid var(--border); background: #FDF9F5; border-radius: 12px; }
-        .rs-label { font-size: 11px; font-weight: 700; color: var(--text2); text-transform: uppercase; margin-bottom: 6px; }
-        .rs-num { font-size: 44px; font-weight: 900; line-height: 1; margin-bottom: 5px; }
-        .rs-grade { font-size: 14px; font-weight: 700; padding: 4px 16px; border-radius: 30px; display: inline-block; }
-        .ge { color: #1D8348; background: #E3F7EC; }
-        .gg { color: #1F618D; background: #E8F4FF; }
-        .ga { color: #B95C0B; background: #FFF4E0; }
-        .gw { color: #A93226; background: #FFF0F0; }
+
+        /* شريط العنوان العلوي */
+        .result-banner {
+            background: linear-gradient(135deg, var(--red3), var(--red));
+            color: #fff; padding: 18px 20px; text-align: center;
+        }
+        .result-banner h1 { font-size: 20px; font-weight: 900; margin-bottom: 4px; }
+        .result-banner p { font-size: 12px; opacity: 0.9; }
+
+        /* بيانات الفرع */
+        .branch-info {
+            background: #FDF5E6; padding: 14px 18px; border-bottom: 2px solid var(--gold2);
+            display: grid; grid-template-columns: repeat(2,1fr); gap: 8px 15px;
+            font-size: 13px;
+        }
+        .branch-info span { color: var(--text2); font-weight: 600; }
+        .branch-info strong { color: var(--red); font-weight: 800; }
+
+        /* مربعات النتائج الكبيرة */
+        .score-cards {
+            display: grid; grid-template-columns: 1fr 1fr; gap: 3px; padding: 0 10px; margin: 15px 0;
+        }
+        .score-item {
+            background: #FDF9F5; border-radius: 20px; padding: 20px 12px; text-align: center;
+            border: 1px solid var(--border);
+        }
+        .score-label { font-size: 11px; font-weight: 700; color: var(--text2); text-transform: uppercase; margin-bottom: 6px; }
+        .score-number { font-size: 44px; font-weight: 900; line-height: 1; margin-bottom: 5px; }
+        .score-grade {
+            font-size: 14px; font-weight: 700; padding: 4px 18px; border-radius: 30px; display: inline-block;
+        }
+
+        /* أشرطة الأقسام */
+        .sections-bars { padding: 15px 18px; border-top: 1px solid var(--border); border-bottom: 1px solid var(--border); }
+        .sections-bars h3 { font-size: 14px; color: var(--red); margin-bottom: 12px; }
+        .bar-row {
+            display: flex; align-items: center; gap: 10px; margin-bottom: 8px;
+        }
+        .bar-label { font-size: 12px; font-weight: 700; width: 110px; color: var(--text2); }
+        .bar-track {
+            flex: 1; height: 10px; background: #EEE; border-radius: 10px; overflow: hidden;
+        }
+        .bar-fill { height: 100%; border-radius: 10px; transition: width 0.5s; }
+        .bar-pct { font-size: 11px; font-weight: 800; width: 40px; text-align: left; color: var(--text2); }
+
+        /* مشكلات */
+        .issues-box {
+            padding: 15px 18px; border-bottom: 1px solid var(--border);
+        }
+        .issues-box h4 { font-size: 13px; color: var(--danger); margin-bottom: 8px; }
+        .issue-tag {
+            display: inline-block; background: #FFECEC; color: var(--danger);
+            padding: 4px 14px; border-radius: 30px; font-size: 11px; font-weight: 600; margin: 2px;
+        }
+        .no-issues { background: #E8F5ED; color: var(--green); padding: 8px; border-radius: 12px; font-weight: 700; text-align: center; }
+
+        /* نتائج الموظفين */
+        .emp-results {
+            padding: 15px 18px;
+        }
+        .emp-results h4 { font-size: 13px; color: var(--red); margin-bottom: 10px; }
+        .emp-row {
+            display: flex; justify-content: space-between; padding: 6px 0;
+            border-bottom: 1px dotted var(--border);
+            font-size: 13px;
+        }
+        .emp-name { font-weight: 600; }
+        .emp-score { font-weight: 800; }
         .ce { color: #1D8348; } .cg { color: #1F618D; } .ca { color: #B95C0B; } .cw { color: #A93226; }
 
         /* الأزرار الرئيسية */
@@ -224,7 +282,7 @@
             touch-action: manipulation;
         }
 
-        /* لوحة التحفيز */
+        /* لوحة التحفيز (كما هي) */
         .dh-stats {
             display: grid; grid-template-columns: repeat(4,1fr); gap: 8px; margin: 15px 0;
         }
@@ -347,6 +405,8 @@
             .pod-avatar { width: 40px; height: 40px; font-size: 16px; }
             .pod-block { height: 40px; }
             .tri-btn { min-width: 45px; padding: 8px 5px; font-size: 10px; }
+            .branch-info { grid-template-columns: 1fr; }
+            .score-number { font-size: 34px; }
         }
         @media print { .print-hide, .tabbar, .btn-grid { display: none !important; } }
     </style>
@@ -380,7 +440,7 @@
 </div>
 
 <div class="container" id="reportBody">
-    <!-- بطاقة بيانات الفرع والزيارة (باستخدام datalist) -->
+    <!-- بطاقة بيانات الفرع والزيارة -->
     <div class="card">
         <div class="card-header"><span class="ico">🏪</span><h2>بيانات الفرع والزيارة / Branch & Visit Info</h2></div>
         <div class="card-body">
@@ -426,7 +486,7 @@
         </div>
     </div>
 
-    <!-- تدقيق الفرع (الأقسام الستة) -->
+    <!-- تدقيق الفرع (الأقسام الستة كاملة) -->
     <div class="card">
         <div class="card-header"><span class="ico">✅</span><h2>تدقيق الفرع / Branch Audit</h2><span class="hcount" id="auditProgress">0/22</span></div>
         <div class="card-body" id="auditBody">
@@ -503,24 +563,12 @@
         <button class="btn btn-calc" onclick="calculate()"><span>📊</span>احسب</button>
         <button class="btn btn-pdf" onclick="savePDF()"><span>📄</span>PDF</button>
         <button class="btn btn-save" onclick="saveToDash()"><span>🏆</span>حفظ في اللوحة</button>
-        <button class="btn btn-wa" onclick="shareWhatsApp()"><span>💬</span>واتساب</button>
+        <button class="btn btn-wa" onclick="shareImageViaWhatsApp()"><span>💬</span>واتساب (صورة)</button>
         <button class="btn btn-reset" onclick="resetForm()"><span>🔄</span>تقرير جديد</button>
     </div>
 
-    <!-- نتيجة التقييم -->
-    <div class="result-card" id="resultCard">
-        <div class="result-top">📊 <span>نتيجة تقييم الفرع / Branch Evaluation Result</span></div>
-        <div class="result-scores">
-            <div class="rs-item"><div class="rs-label">تقييم الفرع / Branch Score</div><div class="rs-num" id="rBranchScore">—</div><div class="rs-grade" id="rBranchGrade">—</div></div>
-            <div class="rs-item"><div class="rs-label">متوسط الموظفين / Avg Employees</div><div class="rs-num" id="rEmpScore">—</div><div class="rs-grade" id="rEmpGrade">—</div></div>
-        </div>
-        <div class="result-details" style="padding:15px">
-            <h4 style="margin-bottom:10px; color:var(--red);">تفصيل الأقسام / Section Breakdown</h4>
-            <div id="rBars"></div>
-            <div id="rErrors"></div>
-            <div id="rEmps"></div>
-        </div>
-    </div>
+    <!-- نتيجة التقييم (سيتم تعبئتها ديناميكياً) -->
+    <div class="result-card" id="resultCard"></div>
 
     <div class="footer">قسم التدريب — <strong>عصام عبد النبي شعبان</strong> | 📞 67011120<br>مطاعم نايف للأغذية © 2026</div>
 </div><!-- container -->
@@ -804,173 +852,206 @@ function addPhotoSlot() {
 }
 
 function gradeInfo(s) {
-    if(s>=90) return {ar:'ممتاز',en:'Excellent',cls:'ge',ccls:'ce'};
-    if(s>=75) return {ar:'جيد',en:'Good',cls:'gg',ccls:'cg'};
-    if(s>=60) return {ar:'مقبول',en:'Average',cls:'ga',ccls:'ca'};
-    return {ar:'ضعيف',en:'Weak',cls:'gw',ccls:'cw'};
+    if(s>=90) return {ar:'ممتاز',en:'Excellent',cls:'ge',ccls:'ce', color:'#1D8348'};
+    if(s>=75) return {ar:'جيد',en:'Good',cls:'gg',ccls:'cg', color:'#1F618D'};
+    if(s>=60) return {ar:'مقبول',en:'Average',cls:'ga',ccls:'ca', color:'#B95C0B'};
+    return {ar:'ضعيف',en:'Weak',cls:'gw',ccls:'cw', color:'#A93226'};
 }
-function barColor(p){ return p>=90?'#1D8348':p>=75?'#D4AF37':p>=60?'#B95C0B':'#A93226'; }
+function barColor(p){ return p>=90?'#1D8348':p>=75?'#1F618D':p>=60?'#B95C0B':'#A93226'; }
 
+// دالة calculate المعدلة لإنشاء بطاقة النتيجة بالتصميم الجديد
 function calculate() {
     const sections = ['clean','hygiene','food','product','service'];
-    let totalYes=0, totalActive=0;
-    sections.forEach(sec=>{ const s=getSectionScore(sec); totalYes+=s.yes; totalActive+=s.yes+s.no; });
-    const branchScore = totalActive>0?Math.round((totalYes/totalActive)*100):0;
-
-    const sectionData = sections.map(key=>{
-        const sc=getSectionScore(key);
-        const names = {clean:'النظافة', hygiene:'نظافة الموظفين', food:'سلامة الغذاء', product:'جودة المنتج', service:'الخدمة'};
-        const enNames = {clean:'Cleanliness', hygiene:'Staff Hygiene', food:'Food Safety', product:'Product Quality', service:'Service'};
-        return {arLabel:names[key], enLabel:enNames[key], pct:calcSectionPct(sc)};
-    });
-
-    const errLabels=[];
-    document.querySelectorAll('[data-section="errors"] .audit-item').forEach(item=>{
-        if(item.getAttribute('data-state')==='yes') errLabels.push(item.querySelector('.audit-item-ar').textContent);
-    });
-
-    const empResults=[];
-    document.querySelectorAll('.emp-card').forEach((card,i)=>{
-        const name=card.querySelector('.emp-name')?.value||(i+1);
-        const scores=card.querySelectorAll('.empScore');
-        let sum=0,cnt=0;
-        scores.forEach(s=>{const v=parseInt(s.value);if(!isNaN(v)){sum+=v;cnt++;}});
-        empResults.push({name, avg:cnt>0?Math.round(sum/cnt):0});
-    });
-    const totalEmpScore=empResults.length>0?Math.round(empResults.reduce((a,b)=>a+b.avg,0)/empResults.length):0;
-
-    const bg=gradeInfo(branchScore);
-    const eg=gradeInfo(totalEmpScore);
-
-    document.getElementById('rBranchScore').textContent=branchScore+'%';
-    document.getElementById('rBranchScore').className='rs-num '+bg.ccls;
-    document.getElementById('rBranchGrade').textContent=bg.ar+' / '+bg.en;
-    document.getElementById('rBranchGrade').className='rs-grade '+bg.cls;
-
-    document.getElementById('rEmpScore').textContent=empResults.length>0?totalEmpScore+'%':'—';
-    document.getElementById('rEmpScore').className='rs-num '+(empResults.length>0?eg.ccls:'');
-    document.getElementById('rEmpGrade').textContent=empResults.length>0?eg.ar+' / '+eg.en:'—';
-    document.getElementById('rEmpGrade').className='rs-grade '+(empResults.length>0?eg.cls:'');
-
-    document.getElementById('rBars').innerHTML = sectionData.map(s=>`
-        <div class="bar-row">
-            <div class="bar-lbl">${s.arLabel} / ${s.enLabel}</div>
-            <div class="bar-track"><div class="bar-fill" style="width:${s.pct||0}%;background:${barColor(s.pct||0)}"></div></div>
-            <div class="bar-pct">${s.pct!==null?s.pct+'%':'N/A'}</div>
-        </div>`).join('');
-
-    document.getElementById('rErrors').innerHTML = errLabels.length>0 ?
-        `<div class="err-box"><h5>⚠️ مشكلات مرصودة (${errLabels.length})</h5>${errLabels.map(l=>`<span class="err-tag">${l}</span>`).join('')}</div>` :
-        `<div class="ok-box">✅ لا توجد مشكلات مرصودة</div>`;
-
-    document.getElementById('rEmps').innerHTML = empResults.length>0 ?
-        `<div style="margin-top:15px"><h4>نتائج الموظفين</h4>${empResults.map(e=>{
-            const g=gradeInfo(e.avg);
-            return `<div class="emp-res-row"><span>${e.name}</span><span class="${g.ccls}">${e.avg}%</span></div>`;
-        }).join('')}</div>` : '';
-
-    document.getElementById('resultCard').classList.add('show');
-    window.scrollTo({top: document.getElementById('resultCard').offsetTop - 20, behavior:'smooth'});
-}
-
-// ================ دالة واتساب المعدلة ================
-function shareWhatsApp() {
-    // تأكد من حساب النتائج أولاً
-    calculate();
-
-    // جمع البيانات
-    const branch = document.getElementById('branchName').value || 'غير محدد';
-    const manager = document.getElementById('branchManager').value || 'غير محدد';
-    const auditor = document.getElementById('auditorName').value || 'غير محدد';
-    const date = document.getElementById('visitDate').value || 'غير محدد';
-    const time = document.getElementById('visitTime').value || 'غير محدد';
-    const type = document.getElementById('visitType').value || 'غير محدد';
-    const visitNum = document.getElementById('visitNum').value || 'غير محدد';
-
-    // نتائج الأقسام
-    const sections = ['clean', 'hygiene', 'food', 'product', 'service'];
     const sectionNames = {
-        clean: 'النظافة العامة',
-        hygiene: 'نظافة الموظفين',
-        food: 'سلامة الغذاء',
-        product: 'جودة المنتج',
-        service: 'الخدمة'
+        clean: { ar: 'النظافة العامة', en: 'Cleanliness' },
+        hygiene: { ar: 'نظافة الموظفين', en: 'Staff Hygiene' },
+        food: { ar: 'سلامة الغذاء', en: 'Food Safety' },
+        product: { ar: 'جودة المنتج', en: 'Product Quality' },
+        service: { ar: 'الخدمة', en: 'Service' }
     };
-    let sectionDetails = '';
-    let totalYes = 0, totalActive = 0;
-    sections.forEach(sec => {
-        const sc = getSectionScore(sec);
-        totalYes += sc.yes;
-        totalActive += sc.yes + sc.no;
-        const pct = calcSectionPct(sc);
-        const bar = pct === null ? '◻️' : (pct >= 90 ? '🟢' : pct >= 75 ? '🔵' : pct >= 60 ? '🟡' : '🔴');
-        sectionDetails += `${bar} *${sectionNames[sec]}*: ${pct !== null ? pct + '%' : 'N/A'} (✅ ${sc.yes} | ❌ ${sc.no} | ⏺️ ${sc.na})\n`;
-    });
 
+    let totalYes = 0, totalActive = 0;
+    sections.forEach(sec => { const s = getSectionScore(sec); totalYes += s.yes; totalActive += s.yes + s.no; });
     const branchScore = totalActive > 0 ? Math.round((totalYes / totalActive) * 100) : 0;
 
-    // المشكلات
+    // نتائج الأقسام مع النسب
+    const sectionData = sections.map(key => {
+        const sc = getSectionScore(key);
+        const pct = calcSectionPct(sc);
+        return {
+            key,
+            arLabel: sectionNames[key].ar,
+            enLabel: sectionNames[key].en,
+            pct: pct,
+            yes: sc.yes,
+            no: sc.no,
+            na: sc.na
+        };
+    });
+
+    // قائمة المشكلات
     const errLabels = [];
     document.querySelectorAll('[data-section="errors"] .audit-item').forEach(item => {
         if (item.getAttribute('data-state') === 'yes') errLabels.push(item.querySelector('.audit-item-ar').textContent);
     });
-    const issuesText = errLabels.length ? errLabels.map(l => `• ${l}`).join('\n') : 'لا توجد مشكلات ✅';
 
-    // الموظفين
+    // نتائج الموظفين
     const empResults = [];
     document.querySelectorAll('.emp-card').forEach((card, i) => {
-        const name = card.querySelector('.emp-name')?.value || `موظف ${i + 1}`;
+        const name = card.querySelector('.emp-name')?.value || `موظف ${i+1}`;
         const scores = card.querySelectorAll('.empScore');
         let sum = 0, cnt = 0;
         scores.forEach(s => { const v = parseInt(s.value); if (!isNaN(v)) { sum += v; cnt++; } });
         const avg = cnt > 0 ? Math.round(sum / cnt) : 0;
-        if (cnt > 0) empResults.push(`• ${name}: ${avg}%`);
+        if (cnt > 0) empResults.push({ name, avg });
     });
-    const empText = empResults.length ? empResults.join('\n') : 'لا يوجد موظفين مضافين';
+    const totalEmpScore = empResults.length > 0 ? Math.round(empResults.reduce((a, b) => a + b.avg, 0) / empResults.length) : 0;
 
-    // الملاحظات وخطة التصحيح
-    const notes = document.getElementById('mainNotes').value || 'لا توجد';
-    const action = document.getElementById('actionPlan').value || 'لا توجد';
+    // تقديرات
+    const bg = gradeInfo(branchScore);
+    const eg = gradeInfo(totalEmpScore);
 
-    // تقييم عام
-    const grade = branchScore >= 90 ? 'ممتاز' : branchScore >= 75 ? 'جيد' : branchScore >= 60 ? 'مقبول' : 'ضعيف';
-    const emoji = branchScore >= 90 ? '🏆' : branchScore >= 75 ? '👍' : branchScore >= 60 ? '⚠️' : '🔻';
+    // بيانات الفرع
+    const branch = document.getElementById('branchName').value || '—';
+    const manager = document.getElementById('branchManager').value || '—';
+    const auditor = document.getElementById('auditorName').value || '—';
+    const date = document.getElementById('visitDate').value || '—';
+    const time = document.getElementById('visitTime').value || '—';
+    const visitType = document.getElementById('visitType').value || '—';
+    const visitNum = document.getElementById('visitNum').value || '—';
 
-    // بناء الرسالة النهائية
-    const message = 
-`🍽️ *تقرير تقييم فرع مطاعم نايف*
-━━━━━━━━━━━━━━━━
-🏪 *الفرع:* ${branch}
-👔 *المدير:* ${manager}
-🕵️ *المقيّم:* ${auditor}
-📅 *التاريخ:* ${date} ⏰ ${time}
-🔍 *نوع الزيارة:* ${type} | #${visitNum}
-━━━━━━━━━━━━━━━━
-${emoji} *النتيجة الكلية: ${branchScore}% (${grade})*
-━━━━━━━━━━━━━━━━
-📊 *تفاصيل الأقسام:*
-${sectionDetails}
-━━━━━━━━━━━━━━━━
-⚠️ *المشكلات المرصودة:* 
-${issuesText}
-━━━━━━━━━━━━━━━━
-👥 *نتائج الموظفين:*
-${empText}
-━━━━━━━━━━━━━━━━
-📝 *ملاحظات المدقق:* 
-${notes}
-━━━━━━━━━━━━━━━━
-🎯 *خطة التصحيح:* 
-${action}
-━━━━━━━━━━━━━━━━
-إدارة التشغيل | قسم التدريب
-عصام عبد النبي شعبان | 📞 67011120
-مطاعم نايف للأغذية © 2026`;
+    // بناء HTML لبطاقة النتيجة
+    const html = `
+        <div class="result-banner">
+            <h1>نتيجة تقييم الفرع / Branch Evaluation Result</h1>
+            <p>${branch} | ${date} ${time}</p>
+        </div>
+        <div class="branch-info">
+            <div><span>الفرع:</span> <strong>${branch}</strong></div>
+            <div><span>المدير:</span> <strong>${manager}</strong></div>
+            <div><span>المدقق:</span> <strong>${auditor}</strong></div>
+            <div><span>التاريخ:</span> <strong>${date}</strong></div>
+        </div>
 
-    // فتح واتساب مع النص
-    window.open('https://wa.me/?text=' + encodeURIComponent(message), '_blank');
+        <div class="score-cards">
+            <div class="score-item">
+                <div class="score-label">تقييم الفرع / Branch Score</div>
+                <div class="score-number" style="color:${bg.color};">${branchScore}%</div>
+                <div class="score-grade" style="background:${bg.color}20; color:${bg.color};">${bg.ar} / ${bg.en}</div>
+            </div>
+            <div class="score-item">
+                <div class="score-label">متوسط الموظفين / Avg Employees</div>
+                <div class="score-number" style="color:${empResults.length ? eg.color : '#888'};">${empResults.length ? totalEmpScore+'%' : '—'}</div>
+                <div class="score-grade" style="background:${empResults.length ? eg.color+'20' : '#EEE'}; color:${empResults.length ? eg.color : '#888'};">${empResults.length ? eg.ar+' / '+eg.en : '—'}</div>
+            </div>
+        </div>
+
+        <div class="sections-bars">
+            <h3>تفصيل الأقسام / Section Breakdown</h3>
+            ${sectionData.map(s => `
+                <div class="bar-row">
+                    <div class="bar-label">${s.arLabel} / ${s.enLabel}</div>
+                    <div class="bar-track"><div class="bar-fill" style="width:${s.pct || 0}%; background:${s.pct ? barColor(s.pct) : '#CCC'};"></div></div>
+                    <div class="bar-pct">${s.pct !== null ? s.pct+'%' : 'N/A'}</div>
+                </div>
+            `).join('')}
+        </div>
+
+        <div class="issues-box">
+            <h4>⚠️ المشكلات المرصودة / Issues Found</h4>
+            ${errLabels.length ? errLabels.map(l => `<span class="issue-tag">${l}</span>`).join('') : '<div class="no-issues">✅ لا توجد مشكلات</div>'}
+        </div>
+
+        ${empResults.length ? `
+        <div class="emp-results">
+            <h4>نتائج الموظفين / Employee Scores</h4>
+            ${empResults.map(e => {
+                const g = gradeInfo(e.avg);
+                return `<div class="emp-row"><span class="emp-name">${e.name}</span><span class="emp-score ${g.ccls}">${e.avg}%</span></div>`;
+            }).join('')}
+        </div>
+        ` : ''}
+
+        <div style="text-align:center; padding:10px; font-size:10px; color:var(--text2); border-top:1px solid var(--border);">
+            إدارة التشغيل | قسم التدريب — عصام عبد النبي شعبان | 67011120
+        </div>
+    `;
+
+    document.getElementById('resultCard').innerHTML = html;
+    document.getElementById('resultCard').classList.add('show');
+    window.scrollTo({ top: document.getElementById('resultCard').offsetTop - 20, behavior: 'smooth' });
 }
 
+// ================ دالة مشاركة الصورة عبر واتساب ================
+async function shareImageViaWhatsApp() {
+    // التأكد من ظهور نتيجة التقييم
+    if (!document.getElementById('resultCard').classList.contains('show')) {
+        calculate();
+        await new Promise(r => setTimeout(r, 500)); // انتظار قليل حتى تظهر النتيجة
+    }
+
+    const element = document.getElementById('resultCard');
+    if (!element) {
+        showToast('❌ لا توجد نتيجة للمشاركة', 'err');
+        return;
+    }
+
+    try {
+        // التقاط صورة للعنصر
+        const canvas = await html2canvas(element, {
+            scale: 2,
+            backgroundColor: '#FFFFFF',
+            logging: false,
+            useCORS: true,
+        });
+
+        // تحويل الكانفاس إلى blob
+        canvas.toBlob(async (blob) => {
+            if (!blob) {
+                showToast('❌ فشل إنشاء الصورة', 'err');
+                return;
+            }
+
+            // إنشاء كائن File
+            const file = new File([blob], 'naif-report.png', { type: 'image/png' });
+
+            // محاولة استخدام Web Share API لمشاركة الملف
+            if (navigator.share && navigator.canShare && navigator.canShare({ files: [file] })) {
+                try {
+                    await navigator.share({
+                        title: 'تقرير تقييم فرع نايف',
+                        text: 'نتيجة تقييم الفرع',
+                        files: [file]
+                    });
+                    showToast('✅ تمت المشاركة بنجاح');
+                } catch (shareError) {
+                    console.error('Share error:', shareError);
+                    // إذا ألغى المستخدم المشاركة، لا نفعل شيئاً
+                    if (shareError.name !== 'AbortError') {
+                        fallbackDownload(canvas);
+                    }
+                }
+            } else {
+                // إذا لم يدعم Web Share الملفات، نقوم بتحميل الصورة
+                fallbackDownload(canvas);
+            }
+        }, 'image/png');
+    } catch (err) {
+        console.error(err);
+        showToast('❌ حدث خطأ أثناء إنشاء الصورة', 'err');
+    }
+}
+
+// دالة احتياطية: تحميل الصورة
+function fallbackDownload(canvas) {
+    const link = document.createElement('a');
+    link.download = 'naif-report.png';
+    link.href = canvas.toDataURL('image/png');
+    link.click();
+    showToast('📥 تم تحميل الصورة، يمكنك إرفاقها يدوياً في واتساب', 'info');
+}
+
+// دالة PDF الأصلية
 async function savePDF() {
     calculate();
     await new Promise(r => setTimeout(r, 600));
